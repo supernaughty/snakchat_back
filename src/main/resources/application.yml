@@ -1,0 +1,12 @@
+spring:
+  datasource:
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: infodba
+      url: jdbc:postgresql//122.44.15.249:35432/Chat
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
