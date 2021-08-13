@@ -21,4 +21,8 @@ public class DateUtil {
 	public static LocalDateTime StringToDateTime(String dateTime) {
 		return LocalDateTime.parse(dateTime + TIME_FORMAT_STRING, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}
+
+	public static boolean isAfter(LocalDateTime standardTime, LocalDateTime compareDate) {
+		return standardTime.isAfter(compareDate) ? true : false;
+	}
 }

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,22 +28,28 @@ public class Session {
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)")
 	private UUID session_id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "member")
 	private Member member;
+
+	@Column(name = "create_time")
+	private LocalDateTime createTime;
 	
-	private LocalDateTime login_time;
-	private LocalDateTime last_action_time;
-	private LocalDateTime logout_time;
+	@Column(name = "last_access_time")
+	private LocalDateTime lastAccessTime;
 	
-	public Session(Member member, LocalDateTime loginTime) {
+	@Column(name = "logout_time")
+	private LocalDateTime logoutTime;
+
+	@Builder
+	public Session(Member member, LocalDateTime createTime) {
 		this.member = member;
-		this.login_time = loginTime;
-	}
-	
-	public void logout(LocalDateTime logoutTime) {
-		this.logout_time = logoutTime;
+		this.createTime = createTime;
+		this.lastAccessTime = createTime;
 	}
 
+	public void logout(LocalDateTime logoutTime) {
+		this.logoutTime = logoutTime;
+	}
 }

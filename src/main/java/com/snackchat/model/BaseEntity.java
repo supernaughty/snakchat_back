@@ -2,24 +2,31 @@ package com.snackchat.model;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 import com.snackchat.model.member.Member;
 
+import lombok.Getter;
 
+
+@Getter
+@MappedSuperclass
 public class BaseEntity {
-	@CreatedDate
-	private LocalDateTime createdDate;
 	
-	@LastModifiedDate
-	private LocalDateTime modifiedDate;
+	@Column(name = "create_date")
+	protected LocalDateTime createdDate;
 	
-	@CreatedBy
-	private Member createMember;
+	@Column(name = "modify_date")
+	protected LocalDateTime modifiedDate;
 	
-	@LastModifiedBy
-	private Member modifiedMember;
+	@OneToOne
+	@JoinColumn(name="create_member")
+	protected Member createMember;
+	
+	@OneToOne
+	@JoinColumn(name="modify_member")
+	protected Member modifiedMember;
 }
