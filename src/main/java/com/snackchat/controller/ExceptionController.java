@@ -25,7 +25,7 @@ public class ExceptionController {
 
 	// 404
 	@ExceptionHandler({ NoSearchObjectException.class })
-	public ResponseEntity<String> notFoundException(final NoSearchObjectException ex) {
+	public ResponseEntity<Object> notFoundException(final NoSearchObjectException ex) {
 		log.warn("error", ex);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
 	}
